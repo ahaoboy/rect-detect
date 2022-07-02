@@ -1,3 +1,5 @@
+[demo](https://rect-detect.vercel.app/)
+
 ```
 npm i rect-detect
 ```
@@ -8,9 +10,7 @@ import { rectDetect } from "rect-detect";
 
 const rect = rectDetect(pixel, width, height, {
     color: [0, 0, 0, 255],
-}).map(([lt, rt, lb, rb]) => {
-    return [lt[0], lt[1], rt[0] - lt[0] + 1, lb[1] - lt[1] + 1];
-});
+}) 
 
 ctx.fillStyle = "red";
 
@@ -20,5 +20,4 @@ for (const [x, y, w, h] of rect) {
     ctx.strokeStyle = "red";
     ctx.stroke();
 }
-
 ```
