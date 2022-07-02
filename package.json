@@ -1,0 +1,26 @@
+{
+  "name": "rect-detect",
+  "version": "0.0.1",
+  "description": "rect detect",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "sideEffects": false,
+  "repository": "https://github.com/ahaoboy/rect-detect",
+  "bugs": "https://github.com/ahaoboy/rect-detect/issues",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "test": "tsx ./test/t.ts"
+  },
+  "keywords": ["detect", "rect"],
+  "author": "ahaoboy",
+  "license": "ISC",
+  "npmName": "rect-detect",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}
