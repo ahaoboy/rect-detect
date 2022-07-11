@@ -6,7 +6,7 @@ export const defaultCmp: Cmp = (color1, color2) => {
   for (let i = 0; i < size; i++) {
     len += (color1[i] - color2[i]) ** 2;
   }
-  return Math.sqrt(len) < 25;
+  return Math.sqrt(len) < 32;
 };
 export const getColor = (
   pixels: Pixels,

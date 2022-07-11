@@ -57,13 +57,13 @@ function App() {
       if (!hit) {
         if (Math.random() < 0.4) {
           const r = Math.min(w, h) >> 1;
-          const _x = (x + r) | 0
-          const _y = (y +r)  |0
+          const _x = (x + r) | 0;
+          const _y = (y + r) | 0;
           circle.push([_x, _y, r]);
-          hitList.push([x, y, w,h]);
+          hitList.push([x, y, w, h]);
         } else {
           rect.push([x, y, w, h]);
-          hitList.push([x, y, w,h]);
+          hitList.push([x, y, w, h]);
         }
       }
     }
@@ -129,9 +129,26 @@ function App() {
     randomInit();
   }, []);
 
+  const onChange = async (e: any) => {
+    const file = e.target.files[0];
+    const url = URL.createObjectURL(file);
+    const img = document.createElement("img");
+    img.src = url;
+    img.onload = () => {
+      const canvas = canvasRef.current!;
+      const ctx = canvas.getContext("2d")!;
+      const { width, height } = img;
+      canvas.width = width;
+      canvas.height = height;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.drawImage(img, 0, 0);
+    };
+  };
   return (
     <div>
       <div>
+        <input type="file" onChange={onChange}></input>
         <button onClick={randomInit}>random</button>
         <button onClick={detect}>detect</button>
       </div>
