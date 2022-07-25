@@ -115,7 +115,7 @@ function App() {
     for (const [x, y, r] of circle) {
       ctx.beginPath();
       ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 2;
       ctx.strokeStyle = R;
       ctx.stroke();
     }
