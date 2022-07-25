@@ -1,5 +1,5 @@
-import type { Cmp, Circle, Rect, Color } from "./type";
-import { defaultCmp, toRect, getColor, getPoints } from "./share";
+import type { Cmp, Circle, Rect, Color } from './type';
+import { defaultCmp, toRect, getColor, getPoints, isRect } from './share';
 
 export const rectDetect = (
   pixels: ArrayLike<number>,
@@ -9,14 +9,16 @@ export const rectDetect = (
     channel: number;
     color: Color;
     cmp: Cmp;
+    eps: number;
   }>
 ): Rect[] => {
   const _option = {
     color: [0, 0, 0, 0],
     channel: 4,
     cmp: defaultCmp,
+    eps: 0.1,
   };
-  const { channel, color, cmp } = { ..._option, ...option };
+  const { channel, color, cmp, eps } = { ..._option, ...option };
   const rectList: Rect[] = [];
   const seen: Record<number, boolean> = {};
   for (let y = 0; y < height; y++) {
@@ -36,7 +38,9 @@ export const rectDetect = (
           seen,
           cmp
         );
-        rectList.push(toRect(pos));
+        if (isRect(pos, eps)) {
+          rectList.push(toRect(pos));
+        }
       } else {
         seen[x + (y << 15)] = true;
       }

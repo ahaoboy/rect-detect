@@ -1,4 +1,4 @@
-import type { Cmp, Point, Color, Pixels, Seen, Rect, Circle } from "./type";
+import type { Cmp, Point, Color, Pixels, Seen, Rect, Circle } from './type';
 
 export const defaultCmp: Cmp = (color1, color2) => {
   const size = Math.min(color1.length, color2.length);
@@ -113,4 +113,48 @@ export const toCircle = (pos: Point[]): Circle => {
   const y = lty + Math.round(h / 2);
   const r = Math.round((w + h) / 4);
   return [x, y, r];
+};
+
+export const equal = (a: number, b: number, eps = 0.1) => {
+  const d = Math.abs(a - b) / Math.max(a, b);
+  console.log(d, eps);
+  return d <= eps;
+};
+
+export const isCircle = (pos: Point[], eps: number = 0.1): boolean => {
+  let ltx = pos[0][0];
+  let lty = pos[0][1];
+  let rbx = pos[0][0];
+  let rby = pos[0][1];
+
+  for (const p of pos) {
+    ltx = Math.min(ltx, p[0]);
+    lty = Math.min(lty, p[1]);
+    rbx = Math.max(rbx, p[0]);
+    rby = Math.max(rby, p[1]);
+  }
+  const w = rbx - ltx;
+  const h = rby - lty;
+  const r = Math.round((w + h) / 4);
+  const area = Math.PI * r * r;
+  return (
+    equal(pos.length, area, eps) && equal(r * 2, w, eps) && equal(r * 2, h, eps)
+  );
+};
+
+export const isRect = (pos: Point[], eps = 0.01): boolean => {
+  let ltx = pos[0][0];
+  let lty = pos[0][1];
+  let rbx = pos[0][0];
+  let rby = pos[0][1];
+
+  for (const p of pos) {
+    ltx = Math.min(ltx, p[0]);
+    lty = Math.min(lty, p[1]);
+    rbx = Math.max(rbx, p[0]);
+    rby = Math.max(rby, p[1]);
+  }
+  const w = rbx - ltx;
+  const h = rby - lty;
+  return equal(pos.length, w * h, eps);
 };

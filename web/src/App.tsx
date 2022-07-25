@@ -17,9 +17,6 @@ const isHit = (box1: number[], box2: number[]) => {
 };
 
 const R = "rgba(255,0,0,255)";
-const G = "rgba(0,255,0,255)";
-const B = "rgba(0,0,255,255)";
-const W = "rgba(255,255,255,255)";
 const GRAY = "rgba(233,233,233,255)";
 const BLACK = "rgba(0,0,0,255)";
 function App() {
@@ -86,7 +83,7 @@ function App() {
     for (const [x, y, r] of circle) {
       ctx.beginPath();
       ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-      ctx.fillStyle = B;
+      ctx.fillStyle = BLACK;
       ctx.fill();
     }
     return canvas;
@@ -112,7 +109,7 @@ function App() {
     console.log("rect", rect);
 
     const circle = circleDetect(pixel, width, height, {
-      color: [0, 0, 255, 255],
+      color: [0, 0, 0, 255],
     });
 
     for (const [x, y, r] of circle) {

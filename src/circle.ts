@@ -1,5 +1,5 @@
-import type { Cmp, Circle, Color, Seen } from "./type";
-import { defaultCmp, getPoints, getColor, toCircle } from "./share";
+import type { Cmp, Circle, Color, Seen } from './type';
+import { defaultCmp, getPoints, getColor, toCircle, isCircle } from './share';
 
 export const circleDetect = (
   pixels: ArrayLike<number>,
@@ -15,8 +15,9 @@ export const circleDetect = (
     color: [0, 0, 0, 0],
     channel: 4,
     cmp: defaultCmp,
+    eps: 0.1,
   };
-  const { channel, color, cmp } = { ..._option, ...option };
+  const { channel, color, cmp, eps } = { ..._option, ...option };
   const circleList: Circle[] = [];
   const seen: Seen = {};
   for (let y = 0; y < height; y++) {
@@ -36,7 +37,9 @@ export const circleDetect = (
           seen,
           cmp
         );
-        circleList.push(toCircle(pos));
+        if (isCircle(pos, eps)) {
+          circleList.push(toCircle(pos));
+        }
       } else {
         seen[x + (y << 15)] = true;
       }
