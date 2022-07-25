@@ -1,6 +1,6 @@
 {
   "name": "rect-detect",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "rect detect",
   "main": "./dist/index.js",
   "exports": "./dist/index.js",
