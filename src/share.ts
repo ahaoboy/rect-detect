@@ -117,7 +117,6 @@ export const toCircle = (pos: Point[]): Circle => {
 
 export const equal = (a: number, b: number, eps = 0.1) => {
   const d = Math.abs(a - b) / Math.max(a, b);
-  console.log(d, eps);
   return d <= eps;
 };
 
